@@ -37,6 +37,10 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy="pedido")
+	private List<Pedido> pedido = new ArrayList<>();
+	
 	
 	public Cliente() {
 		
@@ -82,6 +86,38 @@ public class Cliente implements Serializable {
 	public void setCpfoucnpj(String cpfoucnpj) {
 		this.cpfoucnpj = cpfoucnpj;
 	}
+	
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);
+	}
+
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
 
 	@Override
 	public int hashCode() {
@@ -108,29 +144,7 @@ public class Cliente implements Serializable {
 		return true;
 	}
 
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
-	}
 
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
-	}
-
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
-	}
 	
 	
 	

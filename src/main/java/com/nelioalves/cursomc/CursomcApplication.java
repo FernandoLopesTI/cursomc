@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.nelioalves.cursomc.demain.Categoria;
 import com.nelioalves.cursomc.demain.Cidade;
+import com.nelioalves.cursomc.demain.Cliente;
+import com.nelioalves.cursomc.demain.Endereco;
 import com.nelioalves.cursomc.demain.Estado;
 import com.nelioalves.cursomc.demain.Produto;
+import com.nelioalves.cursomc.demain.enums.TipoCliente;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
 import com.nelioalves.cursomc.repositories.CidadeRepository;
+import com.nelioalves.cursomc.repositories.ClienteRepository;
+import com.nelioalves.cursomc.repositories.EnderecoRepository;
 import com.nelioalves.cursomc.repositories.EstadoRepository;
 import com.nelioalves.cursomc.repositories.ProdutoRepository;
 
@@ -27,6 +32,10 @@ public class CursomcApplication implements CommandLineRunner{
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -35,6 +44,8 @@ public class CursomcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... arg0) throws Exception {
 		
+		//adcionando informações no banco
+		//categoria produto
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritorio");
 		
@@ -53,7 +64,7 @@ public class CursomcApplication implements CommandLineRunner{
 		produtoRepository.save(Arrays.asList(p1, p2, p3));
 		
 		
-		
+		//estado e cidade
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
 		
@@ -66,6 +77,21 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		estadoRepository.save(Arrays.asList(est1, est2));
 		cidadeRepository.save(Arrays.asList(c1, c2, c3));
+		
+		//cliente e endereço e telefone
+		Cliente cli1 = new Cliente(null, "Marica Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));	
+		
+		clienteRepository.save(Arrays.asList(cli1));
+		enderecoRepository.save(Arrays.asList(e1, e2));
+		
+		
+		
 		
 	}
 	

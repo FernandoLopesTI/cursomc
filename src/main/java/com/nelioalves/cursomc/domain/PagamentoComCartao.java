@@ -1,21 +1,16 @@
-package com.nelioalves.cursomc.demain;
+package com.nelioalves.cursomc.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Entity;
 
-import com.nelioalves.cursomc.demain.enums.EstadoPagamento;
+import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer numeroDeParcelas;
 
-	public PagamentoComCartao() {
-		
+	private Integer numeroDeParcelas;
 	
+	public PagamentoComCartao() {
 	}
 
 	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
@@ -32,4 +27,5 @@ public class PagamentoComCartao extends Pagamento {
 	}
 	
 	
+		
 }

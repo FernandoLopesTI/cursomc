@@ -1,7 +1,7 @@
-package com.nelioalves.cursomc.demain.enums;
+package com.nelioalves.cursomc.domain.enums;
 
 public enum TipoCliente {
-	
+
 	PESSOAFISICA(1, "Pessoa Física"),
 	PESSOAJURIDICA(2, "Pessoa Jurídica");
 	
@@ -16,23 +16,24 @@ public enum TipoCliente {
 	public int getCod() {
 		return cod;
 	}
-	public String getDercricao () {
+	
+	public String getDescricao () {
 		return descricao;
 	}
 	
 	public static TipoCliente toEnum(Integer cod) {
+		
 		if (cod == null) {
 			return null;
 		}
 		
 		for (TipoCliente x : TipoCliente.values()) {
-			if(cod.equals(x.getCod())) {
+			if (cod.equals(x.getCod())) {
 				return x;
 			}
 		}
 		
 		throw new IllegalArgumentException("Id inválido: " + cod);
-		
 	}
 	
 }
